@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int addStudent();
+int addStudent(int numStudents);
 void listStudents();
 void helpText();
 
@@ -41,7 +41,7 @@ int main(int argc, const char * argv[]) {
 		
 		switch (input) {
 			case 'a':
-				addStudent(studentCount);
+				addStudent(numStudents);
 				break;
 			case 'd':
 				Delete();
@@ -74,12 +74,13 @@ int main(int argc, const char * argv[]) {
 
 void helpText() {
 	cout << endl << "Commands:" << endl;
-	cout << "    - " << "Add" << "               // Adds student(s) manually or from a file" << endl;
-	cout << "    - " << "Delete" << "               // Deletes a student from the system" << endl;
-	cout << "    - " << "List" << "               // Lists the students by last name" << endl;
-	cout << "    - " << "Search" << "               // Search through students by name, ID, or email" << endl;
-	cout << "    - " << "Update" << "               // Update any of the student fields" << endl;
-	cout << "    - " << "Help" << "               // Lists these commands" << endl;
+	cout << "    - " << "a" << "               // Adds student(s) manually or from a file" << endl;
+	cout << "    - " << "d" << "               // Deletes a student from the system" << endl;
+	cout << "    - " << "l" << "               // Lists the students by last name" << endl;
+	cout << "    - " << "s" << "               // Search through students by name, ID, or email" << endl;
+	cout << "    - " << "u" << "               // Update any of the student fields" << endl;
+	cout << "    - " << "h" << "               // Lists these commands" << endl;
+	cout << "    - " << "q" << "               // Quits the system" << endl;
 }
 
 void listStudents(student* roll, int numStudents)
@@ -92,11 +93,11 @@ void listStudents(student* roll, int numStudents)
 	return;
 }
 
-int addStudent(int studentCount) {
+int addStudent(int numStudents) {
 	char input;
 	string strInput;
 
-	if (studentCount == 50) {
+	if (numStudents == 50) {
 		cout << "There are already the maximum number of students in the class, please delete one to add another.";
 		return;
 	}
@@ -108,7 +109,7 @@ int addStudent(int studentCount) {
 
 		cin >> input;
 		if (input == 'q') {
-			return studentCount;
+			return numStudents;
 		}
 
 		if (input == 'f') {
@@ -134,38 +135,38 @@ int addStudent(int studentCount) {
 			}
 
 			string line;
-			while (getline(studentFile, line) && studentCount < 50) {
+			while (getline(studentFile, line) && numStudents < 50) {
 				istringstream iss(line);
 				vector<string> results((istream_iterator<string>(iss)), istream_iterator<string>());
 
-				roll[studentCount].usfid = stoi(results[0]);
-				roll[studentCount].lastname = results[1];
-				roll[studentCount].firstname = results[2];
-				roll[studentCount].email = results[3];
-				roll[studentCount].presGrade = stoi(results[4]);
-				roll[studentCount].essGrade = stoi(results[5]);
-				roll[studentCount].projGrade = stoi(results[6]);
+				roll[numStudents].usfid = stoi(results[0]);
+				roll[numStudents].lastName = results[1];
+				roll[numStudents].firstName = results[2];
+				roll[numStudents].email = results[3];
+				roll[numStudents].presGrade = stoi(results[4]);
+				roll[numStudents].essGrade = stoi(results[5]);
+				roll[numStudents].projGrade = stoi(results[6]);
 
-				studentCount++;
+				numStudents++;
 			}
-			return studentCount;
+			return numStudents;
 		}
 		else if (input == 'm') {
 			cout << "Enter the student's USF ID number: ";
-			cin >> roll[studentCount].usfid;
+			cin >> roll[numStudents].usfid;
 			cout << "Enter the student's last name: ";
-			cin >> roll[studentCount].lastname;
+			cin >> roll[numStudents].lastName;
 			cout << "Enter the student's first name: ";
-			cin >> roll[studentCount].firstname;
+			cin >> roll[numStudents].firstName;
 			cout << "Enter the student's mail: ";
-			cin >> roll[studentCount].email;
+			cin >> roll[numStudents].email;
 			cout << "Enter the student's presentation grade: ";
-			cin >> roll[studentCount].presGrade;
+			cin >> roll[numStudents].presGrade;
 			cout << "Enter the student's essay grade: ";
-			cin >> roll[studentCount].essGrade;
+			cin >> roll[numStudents].essGrade;
 			cout << "Enter the student's project grade: ";
-			cin >> roll[studentCount].projGrade;
-			return studentCount;
+			cin >> roll[numStudents].projGrade;
+			return numStudents;
 		}
 		else {
 			cout << "Invalid input, please enter either 'f' for file input or 'm' for manual input or 'q' for quit";
