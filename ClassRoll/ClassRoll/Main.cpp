@@ -40,24 +40,27 @@ void main(int argc, const char * argv[]) {
 
 		switch (input) {
 		case 'a':
+		case 'A':
 			numStudents = addStudent(roll, numStudents);
 			break;
 		case 'd':
+		case 'D':
 			numStudents = deleteStudent(roll, numStudents);
 			break;
 		case 'l':
+		case 'L':
 			listStudents(roll, numStudents);
 			break;
-		/*case 's':
-			Search();
-			break;
-		case 'u':
-			Update();
-			break;*/
-		case 'h':
-			helpText();
-			break;
+//		case 's':
+//		case 'S':		
+//			Search();
+//			break;
+//		case 'u':
+//		case 'U':
+//			Update();
+//			break;*/
 		case 'q':
+		case 'Q':
 			return;
 			break;
 		default:
@@ -69,13 +72,12 @@ void main(int argc, const char * argv[]) {
 
 void helpText() {
 	cout << endl << "Commands:" << endl;
-	cout << "    - " << "a" << "               // Adds student(s) manually or from a file" << endl;
-	cout << "    - " << "d" << "               // Deletes a student from the system" << endl;
-	cout << "    - " << "l" << "               // Lists the students by last name" << endl;
-	cout << "    - " << "s" << "               // Search through students by name, ID, or email" << endl;
-	cout << "    - " << "u" << "               // Update any of the student fields" << endl;
-	cout << "    - " << "h" << "               // Lists these commands" << endl;
-	cout << "    - " << "q" << "               // Quits the system" << endl;
+	cout << "    - " << "(a)dd" << "               // Adds student(s) manually or from a file" << endl;
+	cout << "    - " << "(d)elete" << "               // Deletes a student from the system" << endl;
+	cout << "    - " << "(l)ist" << "               // Lists the students by last name" << endl;
+	cout << "    - " << "(s)earch" << "               // Search through students by name, ID, or email" << endl;
+	cout << "    - " << "(u)pdate" << "               // Update any of the student fields" << endl;
+	cout << "    - " << "(q)uit" << "               // Quits the system" << endl;
 }
 
 void listStudents(student* roll, int numStudents)
