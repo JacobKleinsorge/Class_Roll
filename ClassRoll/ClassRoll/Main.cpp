@@ -199,7 +199,7 @@ int deleteStudent(student* roll, int numStudents) {
 				roll[i].essGrade = 0;
 				roll[i].projGrade = 0;
 				--numStudents;
-				rollSort(roll, numSort);
+				rollSort(roll, numStudents);
 				return numStudents;
 			}
 		}
