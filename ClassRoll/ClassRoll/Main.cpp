@@ -213,27 +213,31 @@ void search_menu(student* roll, int numStudents)
 	string input;
 	cout << "Searching by: " << endl;
 	cout << "1) Last Name " << endl << "2) USF ID " << endl << "3) E-mail " << endl << "4) EXIT" << endl;
-	cin >> i;
+	
+	while (true) {
+		cin >> i;
 
 
-	switch (i) {
-	case 1: cout << "Enter the last name: ";
-					cin >> input;
-					search(i,input,roll, numStudents );
-					break;
-	case 2: cout << "Enter the USF ID: U-";
-					cin >> input;
-					search(i,input, roll, numStudents );
-					break;
-	case 3: cout << "Enter the E-mail:";
-					cin >> input;
-					search(i,input, roll, numStudents );
-					break;
-	case 4: cout << "Exiting...";
-					break;
-
+		switch (i) {
+		case 1: cout << "Enter the last name: ";
+			cin >> input;
+			search(i, input, roll, numStudents);
+			return;
+		case 2: cout << "Enter the USF ID: U-";
+			cin >> input;
+			search(i, input, roll, numStudents);
+			return;
+		case 3: cout << "Enter the E-mail:";
+			cin >> input;
+			search(i, input, roll, numStudents);
+			return;
+		case 4: cout << "Exiting...";
+			return;
+		default: cout << "Pick on of the 4 options, numbers 1-4: " << endl;
+			break;
 		}
-return;
+	}
+	return;
 
 }
 
@@ -241,75 +245,79 @@ return;
 void search(int i, string input, student* roll, int numStudents)
 {
 
-if (i == 1){
-		for (int j = 0 ; j < numStudents; j++)
+	if (i == 1) {
+		for (int j = 0; j < numStudents; j++)
 		{
-			if (input == roll[j].lastName ) 	// If value was found
+			if (input == roll[j].lastName) 	// If value was found
 			{
-				cout << "Here are the information for: ";
-				cout << roll[j].lastName <<" , " << roll[j].firstName << endl
-				<< "USF ID: " << roll[j].usfid << endl
-				<< "E-mail: "<< roll[j].email << endl
-				<<"Presentation Grade: " << roll[j].presGrade << endl
-				<< "Essay Grade" << roll[j].essGrade << endl
-				<< "Project Grade: "<< roll[j].projGrade << endl;
+				cout << "Here is the information for: ";
+				cout << roll[j].lastName << " , " << roll[j].firstName << endl
+					<< "USF ID: " << roll[j].usfid << endl
+					<< "E-mail: " << roll[j].email << endl
+					<< "Presentation Grade: " << roll[j].presGrade << endl
+					<< "Essay Grade: " << roll[j].essGrade << endl
+					<< "Project Grade: " << roll[j].projGrade << endl;
 				return;
+			}
+
 		}
+		cout << input << " has not been found." << endl << endl;
+		search_menu(roll, numStudents);
 
+		return;
 	}
-			cout << input << " has not been found." << endl;
 
-			return  ;
-}
+	else if (i == 2) {
+		// convert input into an int
+		int usf_id = atoi(input.c_str());
 
-else if (i == 2){
-	// convert input into an int
-	int usf_id = atoi(input.c_str());
-
-	for (int j = 0 ; j < numStudents; j++)
-	{
-		if (usf_id == roll[j].usfid ) 	// If value was found
+		for (int j = 0; j < numStudents; j++)
 		{
-				cout << "Here are the information for: ";
-				cout << roll[j].lastName <<" , " << roll[j].firstName << endl
-				<< "USF ID: " << roll[j].usfid << endl
-				<< "E-mail: " << roll[j].email << endl
-				<<"Presentation Grade: " << roll[j].presGrade << endl
-				<< "Essay Grade" << roll[j].essGrade << endl
-				<< "Project Grade: "<< roll[j].projGrade << endl;
+			if (usf_id == roll[j].usfid) 	// If value was found
+			{
+				cout << "Here is the information for: ";
+				cout << roll[j].lastName << " , " << roll[j].firstName << endl
+					<< "USF ID: " << roll[j].usfid << endl
+					<< "E-mail: " << roll[j].email << endl
+					<< "Presentation Grade: " << roll[j].presGrade << endl
+					<< "Essay Grade: " << roll[j].essGrade << endl
+					<< "Project Grade: " << roll[j].projGrade << endl;
 				return;
+			}
+
 		}
 
+		cout << input << " has not been found." << endl << endl;
+		search_menu(roll, numStudents);
+
+		return;
 	}
 
-	  cout << usf_id << " has not been found." << endl;
-
-
-}
-
-else if (i == 3){
-	for (int j = 0 ; j < numStudents; j++)
-	{
-		if (input == roll[j].email ) 	// If value was found
+	else if (i == 3) {
+		for (int j = 0; j < numStudents; j++)
 		{
-				cout << "Here are the information for: ";
-				cout << roll[j].lastName <<" , " << roll[j].firstName << endl
-				<< "USF ID: " << roll[j].usfid << endl
-				<< "E-mail: "<< roll[j].email << endl
-				<<"Presentation Grade: " << roll[j].presGrade << endl
-				<< "Essay Grade" << roll[j].essGrade << endl
-				<< "Project Grade: "<< roll[j].projGrade << endl;
+			if (input == roll[j].email) 	// If value was found
+			{
+				cout << "Here is the information for: ";
+				cout << roll[j].lastName << " , " << roll[j].firstName << endl
+					<< "USF ID: " << roll[j].usfid << endl
+					<< "E-mail: " << roll[j].email << endl
+					<< "Presentation Grade: " << roll[j].presGrade << endl
+					<< "Essay Grade: " << roll[j].essGrade << endl
+					<< "Project Grade: " << roll[j].projGrade << endl;
 				return;
+			}
+
 		}
 
-	}
+		cout << input << " has not been found." << endl << endl;
+		search_menu(roll, numStudents);
 
-		cout << input << " has not been found." << endl;
-
-	return  ;
+		return;
 	}
 
 }
+
 
 void rollSort(student* roll, int numStudents)
 {
