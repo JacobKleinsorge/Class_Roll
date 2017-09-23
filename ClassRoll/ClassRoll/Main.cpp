@@ -13,7 +13,8 @@ public:
 	int presGrade;
 	int essGrade;
 	int projGrade;
-	string name;
+	string firstName;
+	string lastName;
 	string email;
 };
 
