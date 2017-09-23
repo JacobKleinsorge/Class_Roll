@@ -28,6 +28,7 @@ void listStudents(student* roll, int numStudents);
 void helpText();
 void search_menu(student* roll, int numStudents);
 void search(int i, string input, student* roll, int numStudents);
+void rollSort(student* roll, int numStudents);
 
 void main(int argc, const char * argv[]) {
 	int numStudents = 0;
@@ -87,7 +88,7 @@ void listStudents(student* roll, int numStudents)
 	cout << endl;
 	for (int i = 0; i < numStudents; i++)
 	{
-		cout << roll[i].lastName << ", " << roll[i].firstName << endl;
+		cout << roll[i].lastName << ", " << roll[i].firstName << " " << roll[i].usfid << endl;
 	}
 
 	return;
@@ -308,4 +309,62 @@ else if (i == 3){
 	return  ;
 	}
 
+}
+
+void rollSort(student* roll, int numStudents)
+{
+	int i = 0;
+	int j = 0;
+	student tmp;
+	bool hole = false;
+
+	//Checks for hole in roll
+	for (i; i < numStudents; i++)
+	{
+		if (roll[i].lastName == "")
+		{
+			hole = true;
+			break;
+		}
+	}
+
+	//If hole exists, shift entries to fill hole
+	if (hole)
+	{
+		for (i; i < numStudents; i++)
+		{
+			tmp = roll[i + 1];
+			roll[i + 1] = roll[i];
+			roll[i] = tmp;
+		}
+	}
+
+	//If hole not found, sort normally
+	else
+	{
+		i = 0;
+		int lowest;
+		for (i; i < numStudents; i++)
+		{
+			lowest = i;
+			for (j = i + 1; j < numStudents; j++)
+			{
+				//If student at index [j] is lower than student at index [lowest], lowest = j
+				if (roll[j].lastName.compare(roll[lowest].lastName) < 0)
+				{
+					lowest = j;
+				}
+			}
+			
+			//If student at [i] is not already lowest value, swap students at [i] and [lowest]
+			if (lowest != i)
+			{
+				tmp = roll[lowest];
+				roll[lowest] = roll[i];
+				roll[i] = tmp;
+			}
+		}
+	}
+
+	return;
 }
