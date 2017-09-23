@@ -26,6 +26,8 @@ int addStudent(student* roll, int numStudents);
 int deleteStudent(student* roll, int numStudents);
 void listStudents(student* roll, int numStudents);
 void helpText();
+void search_menu(student* roll, int numStudents);
+void search(int i, string input, student* roll, int numStudents);
 
 void main(int argc, const char * argv[]) {
 	int numStudents = 0;
@@ -51,10 +53,10 @@ void main(int argc, const char * argv[]) {
 		case 'L':
 			listStudents(roll, numStudents);
 			break;
-//		case 's':
-//		case 'S':		
-//			Search();
-//			break;
+		case 's':
+		case 'S':
+			search_menu(roll, numStudents);
+			break;
 //		case 'u':
 //		case 'U':
 //			Update();
@@ -164,7 +166,7 @@ int addStudent(student* roll, int numStudents) {
 			cin >> roll[numStudents].essGrade;
 			cout << "Enter the student's project grade: ";
 			cin >> roll[numStudents].projGrade;
-			
+
 			numStudents++;
 			return numStudents;
 		}
@@ -203,3 +205,107 @@ int deleteStudent(student* roll, int numStudents) {
 
 
 
+void search_menu(student* roll, int numStudents)
+{
+	int i = 0;
+
+	string input;
+	cout << "Searching by: " << endl;
+	cout << "1) Last Name " << endl << "2) USF ID " << endl << "3) E-mail " << endl << "4) EXIT" << endl;
+	cin >> i;
+
+
+	switch (i) {
+	case 1: cout << "Enter the last name: ";
+					cin >> input;
+					search(i,input,roll, numStudents );
+					break;
+	case 2: cout << "Enter the USF ID: U-";
+					cin >> input;
+					search(i,input, roll, numStudents );
+					break;
+	case 3: cout << "Enter the E-mail:";
+					cin >> input;
+					search(i,input, roll, numStudents );
+					break;
+	case 4: cout << "Exiting...";
+					break;
+
+		}
+return;
+
+}
+
+
+void search(int i, string input, student* roll, int numStudents)
+{
+
+if (i == 1){
+		for (int j = 0 ; j < numStudents; j++)
+		{
+			if (input == roll[j].lastName ) 	// If value was found
+			{
+				cout << "Here are the information for: ";
+				cout << roll[j].lastName <<" , " << roll[j].firstName << endl
+				<< "USF ID: " << roll[j].usfid << endl
+				<< "E-mail: "<< roll[j].email << endl
+				<<"Presentation Grade: " << roll[j].presGrade << endl
+				<< "Essay Grade" << roll[j].essGrade << endl
+				<< "Project Grade: "<< roll[j].projGrade << endl;
+				return;
+		}
+
+	}
+			cout << input << " has not been found." << endl;
+
+			return  ;
+}
+
+else if (i == 2){
+	// convert input into an int
+	int usf_id = atoi(input.c_str());
+
+	for (int j = 0 ; j < numStudents; j++)
+	{
+		if (usf_id == roll[j].usfid ) 	// If value was found
+		{
+				cout << "Here are the information for: ";
+				cout << roll[j].lastName <<" , " << roll[j].firstName << endl
+				<< "USF ID: " << roll[j].usfid << endl
+				<< "E-mail: " << roll[j].email << endl
+				<<"Presentation Grade: " << roll[j].presGrade << endl
+				<< "Essay Grade" << roll[j].essGrade << endl
+				<< "Project Grade: "<< roll[j].projGrade << endl;
+				return;
+		}
+
+	}
+
+	  cout << usf_id << " has not been found." << endl;
+
+
+}
+
+else if (i == 3){
+	for (int j = 0 ; j < numStudents; j++)
+	{
+		if (input == roll[j].email ) 	// If value was found
+		{
+				cout << "Here are the information for: ";
+				cout << roll[j].lastName <<" , " << roll[j].firstName << endl
+				<< "USF ID: " << roll[j].usfid << endl
+				<< "E-mail: "<< roll[j].email << endl
+				<<"Presentation Grade: " << roll[j].presGrade << endl
+				<< "Essay Grade" << roll[j].essGrade << endl
+				<< "Project Grade: "<< roll[j].projGrade << endl;
+				return;
+		}
+
+	}
+
+		cout << input << " has not been found." << endl;
+
+	return  ;
+	}
+
+}
