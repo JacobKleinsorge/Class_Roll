@@ -150,6 +150,7 @@ int addStudent(student* roll, int numStudents) {
 
 				numStudents++;
 			}
+			rollSort(roll, numStudents);
 			return numStudents;
 		}
 		else if (input == 'm') {
@@ -169,6 +170,7 @@ int addStudent(student* roll, int numStudents) {
 			cin >> roll[numStudents].projGrade;
 
 			numStudents++;
+			rollSort(roll, numStudents);
 			return numStudents;
 		}
 		else {
@@ -197,6 +199,7 @@ int deleteStudent(student* roll, int numStudents) {
 				roll[i].essGrade = 0;
 				roll[i].projGrade = 0;
 				--numStudents;
+				rollSort(roll, numSort);
 				return numStudents;
 			}
 		}
