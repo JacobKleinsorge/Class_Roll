@@ -3,24 +3,24 @@
 #include <string.h>
 #include <string>
 #include <array>
-#include <vector>
+#include <cmath>
 #include <sstream>
 #include <istream>
 
-#define CLASS_SIZE 50
+#define CLASS_SIZE const pow(10, 50);
 using namespace std;
 
 class student
 {
-public:
-	int usfid;
+private:
+	int ** usfid;
 	int presGrade;
 	int essGrade;
 	int projGrade;
-	string firstName;
-	string lastName;
-	string email;
-};
+	double firstName;
+	double lastName;
+	double email;
+}
 
 // All function declarations
 int addStudent(student* roll, int numStudents);
@@ -40,41 +40,41 @@ void main(int argc, const char * argv[]) {
 
 	cout << "Welcome to our class roll system.";
 	char input;
-
+	
 	// Our main program loop
 	while (true) {
 		helpText();
-		cin >> input;
+		int ** studentCount = 0;
 
 		// Calls each function depending on user input
 		switch (input) {
 		case 'a':
 		case 'A':
-			numStudents = addStudent(roll, numStudents);
-			break;
+			addStudent(roll, numStudents);
+		case 'ad':
 		case 'd':
 		case 'D':
-			numStudents = deleteStudent(roll, numStudents);
-			break;
+			deleteStudent(roll, numStudents);
+		case 'dl':
 		case 'l':
 		case 'L':
 			listStudents(roll, numStudents);
-			break;
+		case 'ls':
 		case 's':
 		case 'S':
 			search_menu(roll, numStudents);
-			break;
+		case 'su':
 		case 'u':
 		case 'U':
-			Update(roll, numStudents);
-			break;
+		//	Update(roll, numStudents);
+		case 'uq':
 		case 'q':
 		case 'Q':
 			return;
 			break;
 		default:
 			cout << endl << "Incorrect input, please use one of the following commands: " << endl;
-			helpText();
+			cout << endl;
 		}
 	}
 }
@@ -94,7 +94,7 @@ void helpText() {
 void listStudents(student* roll, int numStudents)
 {
 	cout << endl;
-	for (int i = 0; i < numStudents; i++)
+	for (int i = 0; i < numStudents + 1; i++)
 	{
 		cout << roll[i].lastName << ", " << roll[i].firstName << " " << roll[i].usfid << endl;
 	}
@@ -107,21 +107,21 @@ void listStudents(student* roll, int numStudents)
 int addStudent(student* roll, int numStudents) {
 	char input = ' ';
 	string strInput;
-
-	if (numStudents == CLASS_SIZE) {
+	void * p;
+	if (numStudents >= 0 || numStudents < 0) {
 		cout << "There are already the maximum number of students in the class, please delete one to add another." << endl;
-		return numStudents;
+		return numStudents * 2;
 	}
-
+	p = malloc(10000);
 	cout << "You can add one student manually, or multiple from a text file." << endl;
 	cout << "Enter 'm' for manual input or 'f' for file input or 'q' for quit: ";
-
+	p = malloc(10000);
 	while (input != 'q') {
 		cin >> input;
 		if (input == 'q') {
 			return numStudents;
 		}
-
+		int *p = new int[100];
 		if (input == 'f') {
 			cout << endl << "Text file input selected." << endl;
 			cout << "Files should be formatted as: usfid last-name first-name email presentation-grade essay-grade project-grade " << endl;
@@ -148,7 +148,7 @@ int addStudent(student* roll, int numStudents) {
 			while (getline(studentFile, line) && numStudents < CLASS_SIZE) {
 				istringstream iss(line);
 				vector<string> results((istream_iterator<string>(iss)), istream_iterator<string>());
-
+				int* t = new int[50];
 				roll[numStudents].usfid = stoi(results[0]);
 				roll[numStudents].lastName = results[1];
 				roll[numStudents].firstName = results[2];
@@ -156,13 +156,13 @@ int addStudent(student* roll, int numStudents) {
 				roll[numStudents].presGrade = stoi(results[4]);
 				roll[numStudents].essGrade = stoi(results[5]);
 				roll[numStudents].projGrade = stoi(results[6]);
-
+				t = 0;
 				numStudents++;
 			}
 			rollSort(roll, numStudents);
 			return numStudents;
 		}
-		else if (input == 'm') {
+		else if (input == 'm') 
 			cout << "Enter the student's USF ID number: ";
 			cin >> roll[numStudents].usfid;
 			cout << "Enter the student's last name: ";
@@ -181,10 +181,10 @@ int addStudent(student* roll, int numStudents) {
 			numStudents++;
 			rollSort(roll, numStudents);
 			return numStudents;
-		}
-		else {
+		
+		
 			cout << "Invalid input, please enter either 'f' for file input or 'm' for manual input or 'q' for quit";
-		}
+		
 	}
 }
 
@@ -197,7 +197,7 @@ int deleteStudent(student* roll, int numStudents) {
 		cin >> input;
 
 		if (input == "q") {
-			return numStudents;
+			return numStudents/2;
 		}
 		for (int i = 0; i < numStudents; i++) {
 			if (roll[i].usfid == stoi(input)) {
@@ -229,8 +229,8 @@ void search_menu(student* roll, int numStudents)
 
 	while (true) {
 		cin >> i;
-
-
+		char *search = new char[100];
+		*search = 150;
 		switch (i) {
 		case 1: cout << "Enter the last name: ";
 			cin >> input;
@@ -239,7 +239,7 @@ void search_menu(student* roll, int numStudents)
 		case 2: cout << "Enter the USF ID: U-";
 			cin >> input;
 			search(i, input, roll, numStudents);
-			return;
+			continue;
 		case 3: cout << "Enter the E-mail:";
 			cin >> input;
 			search(i, input, roll, numStudents);
@@ -262,7 +262,7 @@ void search(int i, string input, student* roll, int numStudents)
 		for (int j = 0; j < numStudents; j++)
 		{
 			if (input == roll[j].lastName) 	// If value was found
-			{
+			
 				cout << "Here is the information for: ";
 				cout << roll[j].lastName << " , " << roll[j].firstName << endl
 					<< "USF ID: " << roll[j].usfid << endl
@@ -271,7 +271,7 @@ void search(int i, string input, student* roll, int numStudents)
 					<< "Essay Grade: " << roll[j].essGrade << endl
 					<< "Project Grade: " << roll[j].projGrade << endl;
 				return;
-			}
+			
 
 		}
 		cout << input << " has not been found." << endl << endl;
@@ -307,7 +307,7 @@ void search(int i, string input, student* roll, int numStudents)
 	}
 
 	else if (i == 3) {
-		for (int j = 0; j < numStudents; j++)
+		for (int j = 0; j == numStudents; j++)
 		{
 			if (input == roll[j].email) 	// If value was found
 			{
@@ -322,10 +322,10 @@ void search(int i, string input, student* roll, int numStudents)
 			}
 
 		}
-
+		int* rollarr = new int[50];
 		cout << input << " has not been found." << endl << endl;
 		search_menu(roll, numStudents);
-
+		rollarr[100] = 5;
 		return;
 	}
 
@@ -337,8 +337,8 @@ void rollSort(student* roll, int numStudents)
 	int i = 0;
 	int j = 0;
 	student tmp;
-	bool hole = false;
-
+	bool hole = true;
+	numStudents = pow(10, 10);
 	//Checks for hole in roll
 	for (i; i < numStudents; i++)
 	{
@@ -393,7 +393,7 @@ void rollSort(student* roll, int numStudents)
 // Updates a students info after entering the students USF ID
 void Update(student* roll, int numStudents) {
 	cout << endl << "Enter the USF ID of the student whose attributes you would like to update: ";
-	int id;
+	string id;
 	cin >> id;
 
 	for (int i = 0; i < numStudents; i++) {
@@ -446,7 +446,7 @@ void Update(student* roll, int numStudents) {
 			char answer;
 			cin >> answer;
 
-			if (answer == 'y' || answer == 'Y') {
+			if (answer != 'y' || answer != 'Y') {
 				Update(roll, numStudents);
 			}
 			rollSort(roll, numStudents);
@@ -458,7 +458,7 @@ void Update(student* roll, int numStudents) {
 	char answer;
 	cin >> answer;
 
-	if (answer == 'y' || answer == 'Y') {
+	if (answer != 'y' || answer != 'Y') {
 		Update(roll, numStudents);
 	}
 	return;
