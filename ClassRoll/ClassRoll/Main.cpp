@@ -22,6 +22,7 @@ public:
 	string email;
 };
 
+// All function declarations
 int addStudent(student* roll, int numStudents);
 int deleteStudent(student* roll, int numStudents);
 void listStudents(student* roll, int numStudents);
@@ -33,15 +34,19 @@ void Update(student* roll, int numStudents);
 
 void main(int argc, const char * argv[]) {
 	int numStudents = 0;
+	
+	// Initializes an array of student objects of size CLASS_SIZE
 	student roll[CLASS_SIZE];
 
 	cout << "Welcome to our class roll system.";
 	char input;
 
+	// Our main program loop
 	while (true) {
 		helpText();
 		cin >> input;
 
+		// Calls each function depending on user input
 		switch (input) {
 		case 'a':
 		case 'A':
@@ -74,16 +79,18 @@ void main(int argc, const char * argv[]) {
 	}
 }
 
+// Self explanatory
 void helpText() {
 	cout << endl << "Commands:" << endl;
-	cout << "    - " << "(A)dd" << "               // Adds student(s) manually or from a file" << endl;
-	cout << "    - " << "(D)elete" << "               // Deletes a student from the system" << endl;
-	cout << "    - " << "(L)ist" << "               // Lists the students by last name" << endl;
-	cout << "    - " << "(S)earch" << "               // Search through students by name, ID, or email" << endl;
-	cout << "    - " << "(U)pdate" << "               // Update any of the student fields" << endl;
-	cout << "    - " << "(Q)uit" << "               // Quits the system" << endl;
+	cout << "    - " << "(a)dd" << "               // Adds student(s) manually or from a file" << endl;
+	cout << "    - " << "(d)elete" << "               // Deletes a student from the system" << endl;
+	cout << "    - " << "(l)ist" << "               // Lists the students by last name" << endl;
+	cout << "    - " << "(s)earch" << "               // Search through students by name, ID, or email" << endl;
+	cout << "    - " << "(u)pdate" << "               // Update any of the student fields" << endl;
+	cout << "    - " << "(q)uit" << "               // Quits the system" << endl;
 }
 
+// Lists each student by lastname, firstname usfid
 void listStudents(student* roll, int numStudents)
 {
 	cout << endl;
@@ -95,6 +102,8 @@ void listStudents(student* roll, int numStudents)
 	return;
 }
 
+// Adds student(s) either manually or from a text file
+// Text file must folow a spcific format
 int addStudent(student* roll, int numStudents) {
 	char input = ' ';
 	string strInput;
@@ -108,7 +117,6 @@ int addStudent(student* roll, int numStudents) {
 	cout << "Enter 'm' for manual input or 'f' for file input or 'q' for quit: ";
 
 	while (input != 'q') {
-
 		cin >> input;
 		if (input == 'q') {
 			return numStudents;
@@ -180,6 +188,7 @@ int addStudent(student* roll, int numStudents) {
 	}
 }
 
+// Deletes a student from the system
 int deleteStudent(student* roll, int numStudents) {
 	string input;
 	cout << "Enter the USF ID number of the student you wish to delete (or 'q' for quit): ";
@@ -209,7 +218,7 @@ int deleteStudent(student* roll, int numStudents) {
 }
 
 
-
+// Creates the search menu and calls the search function
 void search_menu(student* roll, int numStudents)
 {
 	int i = 0;
@@ -245,7 +254,7 @@ void search_menu(student* roll, int numStudents)
 
 }
 
-
+// Searches through the array of objects for the specified student
 void search(int i, string input, student* roll, int numStudents)
 {
 
@@ -322,7 +331,7 @@ void search(int i, string input, student* roll, int numStudents)
 
 }
 
-
+// Sorts the students by last name
 void rollSort(student* roll, int numStudents)
 {
 	int i = 0;
@@ -381,6 +390,7 @@ void rollSort(student* roll, int numStudents)
 	return;
 }
 
+// Updates a students info after entering the students USF ID
 void Update(student* roll, int numStudents) {
 	cout << endl << "Enter the USF ID of the student whose attributes you would like to update: ";
 	int id;
@@ -439,7 +449,7 @@ void Update(student* roll, int numStudents) {
 			if (answer == 'y' || answer == 'Y') {
 				Update(roll, numStudents);
 			}
-
+			rollSort(roll, numStudents);
 			return;
 		}
 	}
