@@ -444,4 +444,12 @@ void Update(student* roll, int numStudents) {
 		}
 	}
 	cout << endl << "Student not found";
+	cout << endl << "Would you like to try again? (y/n)" << endl;
+	char answer;
+	cin >> answer;
+
+	if (answer == 'y' || answer == 'Y') {
+		Update(roll, numStudents);
+	}
+	return;
 }
