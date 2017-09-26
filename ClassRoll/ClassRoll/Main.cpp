@@ -76,12 +76,12 @@ void main(int argc, const char * argv[]) {
 
 void helpText() {
 	cout << endl << "Commands:" << endl;
-	cout << "    - " << "(a)dd" << "               // Adds student(s) manually or from a file" << endl;
-	cout << "    - " << "(d)elete" << "               // Deletes a student from the system" << endl;
-	cout << "    - " << "(l)ist" << "               // Lists the students by last name" << endl;
-	cout << "    - " << "(s)earch" << "               // Search through students by name, ID, or email" << endl;
-	cout << "    - " << "(u)pdate" << "               // Update any of the student fields" << endl;
-	cout << "    - " << "(q)uit" << "               // Quits the system" << endl;
+	cout << "    - " << "(A)dd" << "               // Adds student(s) manually or from a file" << endl;
+	cout << "    - " << "(D)elete" << "               // Deletes a student from the system" << endl;
+	cout << "    - " << "(L)ist" << "               // Lists the students by last name" << endl;
+	cout << "    - " << "(S)earch" << "               // Search through students by name, ID, or email" << endl;
+	cout << "    - " << "(U)pdate" << "               // Update any of the student fields" << endl;
+	cout << "    - " << "(Q)uit" << "               // Quits the system" << endl;
 }
 
 void listStudents(student* roll, int numStudents)
