@@ -29,6 +29,7 @@ void helpText();
 void search_menu(student* roll, int numStudents);
 void search(int i, string input, student* roll, int numStudents);
 void rollSort(student* roll, int numStudents);
+void Update(student* roll, int numStudents);
 
 void main(int argc, const char * argv[]) {
 	int numStudents = 0;
@@ -58,10 +59,10 @@ void main(int argc, const char * argv[]) {
 		case 'S':
 			search_menu(roll, numStudents);
 			break;
-//		case 'u':
-//		case 'U':
-//			Update();
-//			break;*/
+		case 'u':
+		case 'U':
+			Update(roll, numStudents);
+			break;
 		case 'q':
 		case 'Q':
 			return;
@@ -216,7 +217,7 @@ void search_menu(student* roll, int numStudents)
 	string input;
 	cout << "Searching by: " << endl;
 	cout << "1) Last Name " << endl << "2) USF ID " << endl << "3) E-mail " << endl << "4) EXIT" << endl;
-	
+
 	while (true) {
 		cin >> i;
 
@@ -366,7 +367,7 @@ void rollSort(student* roll, int numStudents)
 					lowest = j;
 				}
 			}
-			
+
 			//If student at [i] is not already lowest value, swap students at [i] and [lowest]
 			if (lowest != i)
 			{
@@ -378,4 +379,69 @@ void rollSort(student* roll, int numStudents)
 	}
 
 	return;
+}
+
+void Update(student* roll, int numStudents) {
+	cout << endl << "Enter the USF ID of the student whose attributes you would like to update: ";
+	int id;
+	cin >> id;
+
+	for (int i = 0; i < numStudents; i++) {
+		if (roll[i].usfid == id) {
+			cout << endl << "Student found. Which attribute would you like to update?" << endl << "Enter the number in front of the attribute" << endl;
+			cout << "1  -  USF ID" << endl;
+			cout << "2  -  First name" << endl;
+			cout << "3  -  Last name" << endl;
+			cout << "4  -  Email" << endl;
+			cout << "5  -  Presentation grade" << endl;
+			cout << "6  -  Essay grade" << endl;
+			cout << "7  -  Project grade" << endl << endl;
+
+			cout << "Attribute number: ";
+			int input;
+			cin >> input;
+
+			switch (input) {
+				case 1:
+					cout << endl << "Enter the new USF ID: ";
+					cin >> roll[i].usfid;
+					break;
+				case 2:
+					cout << endl << "Enter the new First Name: ";
+					cin >> roll[i].firstName;
+					break;
+				case 3:
+					cout << endl << "Enter the new Last Name: ";
+					cin >> roll[i].lastName;
+					break;
+				case 4:
+					cout << endl << "Enter the new Email: ";
+					cin >> roll[i].email;
+					break;
+				case 5:
+					cout << endl << "Enter the new Presentation Grade: ";
+					cin >> roll[i].presGrade;
+					break;
+				case 6:
+					cout << endl << "Enter the new Essay Grade: ";
+					cin >> roll[i].essGrade;
+					break;
+				case 7:
+					cout << endl << "Enter the new Project Grade: ";
+					cin >> roll[i].projGrade;
+					break;
+			}
+			cout << endl << "Value updated.";
+			cout << endl << "Would you like to update another value? (y/n)" << endl;
+			char answer;
+			cin >> answer;
+
+			if (answer == 'y' || answer == 'Y') {
+				Update(roll, numStudents);
+			}
+
+			return;
+		}
+	}
+	cout << endl << "Student not found";
 }
